@@ -13,6 +13,23 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+// ActionMacro completes given macro
+func ActionMacro(s string) carapace.Action {
+	return carapace.ActionCallback(func(c carapace.Context) carapace.Action {
+		r := regexp.MustCompile(`^\$(?P<macro>[^(]*)(\((?P<arg>.*)\))?$`)
+		if !r.MatchString(s) {
+			return carapace.ActionMessage(fmt.Sprintf("malformed macro: '%v'", s))
+		}
+
+		matches := findNamedMatches(r, s)
+		if m, ok := macros[matches["macro"]]; !ok {
+			return carapace.ActionMessage(fmt.Sprintf("unknown macro: '%v'", s))
+		} else {
+			return m.f(matches["arg"])
+		}
+	})
+}
+
 // ActionSpec completes a spec
 func ActionSpec(path string) carapace.Action {
 	return carapace.ActionCallback(func(c carapace.Context) carapace.Action {
