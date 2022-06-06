@@ -9,7 +9,7 @@ Core macros provided by [carapace-spec](https://github.com/rsteube/carapace-spec
 ["$directories"]
 ```
 
-## execcommand
+## exec
 
 [`$(<command>)`](https://rsteube.github.io/carapace/carapace/action/actionExecCommand.html) executes given command in a `sh` shell.
 

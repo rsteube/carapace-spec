@@ -3,7 +3,6 @@ package spec
 import (
 	"fmt"
 	"reflect"
-	"regexp"
 	"strings"
 
 	"github.com/rsteube/carapace"
@@ -25,25 +24,12 @@ func addCoreMacro(s string, m Macro) {
 	macros[s] = m
 }
 
+// AddMacro adds a custom macro
 func AddMacro(s string, m Macro) {
 	macros["_"+s] = m
 }
 
-// ActionMacro completes given macro
-func ActionMacro(s string) carapace.Action {
-	r := regexp.MustCompile(`^\$(?P<macro>[^(]*)(\((?P<arg>.*)\))?$`)
-	if !r.MatchString(s) {
-		return carapace.ActionMessage(fmt.Sprintf("malformed macro: '%v'", s))
-	}
-
-	matches := findNamedMatches(r, s)
-	if m, ok := macros[matches["macro"]]; !ok {
-		return carapace.ActionMessage(fmt.Sprintf("unknown macro: '%v'", s))
-	} else {
-		return m.f(matches["arg"])
-	}
-}
-
+// MacroN careates a macro without an argument
 func MacroN(f func() carapace.Action) Macro {
 	return Macro{
 		f: func(s string) carapace.Action {
@@ -53,6 +39,7 @@ func MacroN(f func() carapace.Action) Macro {
 	}
 }
 
+// MacroI careates a macro with an argument
 func MacroI[T any](f func(t T) carapace.Action) Macro {
 	return Macro{
 		f: func(s string) carapace.Action {
@@ -80,6 +67,7 @@ func MacroI[T any](f func(t T) carapace.Action) Macro {
 	}
 }
 
+// MacroV careates a macro with a variable argument
 func MacroV[T any](f func(s ...T) carapace.Action) Macro {
 	return Macro{
 		f: func(s string) carapace.Action {

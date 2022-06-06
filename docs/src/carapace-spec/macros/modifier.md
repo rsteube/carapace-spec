@@ -36,7 +36,7 @@ Modifiers change the completion for a position in general.
 
 ## noflag
 
-`$noflag` disables flag parsing for the current command.
+`$noflag` disables flag parsing for the corresponding (sub)command.
 
 ```yml
 ["$noflag"]

@@ -72,6 +72,4 @@ completion:
       - "X\tdead (should never be seen)"
       - "Z\tdefunct (zombie) process terminated but not reaped by its parent"
       - "t\tstopped by debugger during the tracing"
-  positionalany: [
-      "$(ps h -A -o pid,comm | awk '{print $1\"\t\"$2}')"
-  ]
+  positionalany: ["$(ps h -A -o pid,comm | awk '{print $1\"\t\"$2}')"]
