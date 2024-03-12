@@ -1,0 +1,646 @@
+<!DOCTYPE HTML>
+<html lang="en" class="mocha" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>carapace-spec</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="asciinema/asciinema-player.css">
+        <link rel="stylesheet" href="./theme/catppuccin.css">
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "mocha";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('mocha')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item "><a href="carapace-spec.html"><strong aria-hidden="true">1.</strong> carapace-spec</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="carapace-spec/usage.html"><strong aria-hidden="true">1.1.</strong> Usage</a></li><li class="chapter-item "><a href="carapace-spec/command.html"><strong aria-hidden="true">1.2.</strong> Command</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="carapace-spec/command/name.html"><strong aria-hidden="true">1.2.1.</strong> Name</a></li><li class="chapter-item "><a href="carapace-spec/command/aliases.html"><strong aria-hidden="true">1.2.2.</strong> Aliases</a></li><li class="chapter-item "><a href="carapace-spec/command/description.html"><strong aria-hidden="true">1.2.3.</strong> Description</a></li><li class="chapter-item "><a href="carapace-spec/command/group.html"><strong aria-hidden="true">1.2.4.</strong> Group</a></li><li class="chapter-item "><a href="carapace-spec/command/hidden.html"><strong aria-hidden="true">1.2.5.</strong> Hidden</a></li><li class="chapter-item "><a href="carapace-spec/command/parsing.html"><strong aria-hidden="true">1.2.6.</strong> Parsing</a></li><li class="chapter-item "><a href="carapace-spec/command/flags.html"><strong aria-hidden="true">1.2.7.</strong> Flags</a></li><li class="chapter-item "><a href="carapace-spec/command/persistentFlags.html"><strong aria-hidden="true">1.2.8.</strong> PersistentFlags</a></li><li class="chapter-item "><a href="carapace-spec/command/exclusiveFlags.html"><strong aria-hidden="true">1.2.9.</strong> ExclusiveFlags</a></li><li class="chapter-item "><a href="carapace-spec/command/run.html"><strong aria-hidden="true">1.2.10.</strong> Run</a></li><li class="chapter-item "><a href="carapace-spec/command/completion.html"><strong aria-hidden="true">1.2.11.</strong> Completion</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="carapace-spec/command/completion/flag.html"><strong aria-hidden="true">1.2.11.1.</strong> Flag</a></li><li class="chapter-item "><a href="carapace-spec/command/completion/positional.html"><strong aria-hidden="true">1.2.11.2.</strong> Positional</a></li><li class="chapter-item "><a href="carapace-spec/command/completion/positionalAny.html"><strong aria-hidden="true">1.2.11.3.</strong> PositionalAny</a></li><li class="chapter-item "><a href="carapace-spec/command/completion/dash.html"><strong aria-hidden="true">1.2.11.4.</strong> Dash</a></li><li class="chapter-item "><a href="carapace-spec/command/completion/dashAny.html"><strong aria-hidden="true">1.2.11.5.</strong> DashAny</a></li></ol></li><li class="chapter-item "><a href="carapace-spec/command/commands.html"><strong aria-hidden="true">1.2.12.</strong> Commands</a></li></ol></li><li class="chapter-item "><a href="carapace-spec/values.html"><strong aria-hidden="true">1.3.</strong> Values</a></li><li class="chapter-item "><a href="carapace-spec/macros.html"><strong aria-hidden="true">1.4.</strong> Macros</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="carapace-spec/macros/core.html"><strong aria-hidden="true">1.4.1.</strong> Core</a></li><li class="chapter-item "><a href="carapace-spec/macros/modifier.html"><strong aria-hidden="true">1.4.2.</strong> Modifier</a></li><li class="chapter-item "><a href="carapace-spec/macros/custom.html"><strong aria-hidden="true">1.4.3.</strong> Custom</a></li></ol></li><li class="chapter-item "><a href="carapace-spec/variables.html"><strong aria-hidden="true">1.5.</strong> Variables</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="latte">Latte</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="frappe">Frappé</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="macchiato">Macchiato</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mocha">Mocha</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">carapace-spec</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/carapace-sh/carapace-spec" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="carapace-spec"><a class="header" href="#carapace-spec">carapace-spec</a></h1>
+<p>Define simple completions using a spec file (based on <a href="https://github.com/carapace-sh/carapace">carapace</a>).</p>
+<pre><code class="language-yaml">name: mycmd
+description: my command
+flags:
+  --optarg?: optarg flag
+  -r, --repeatable*: repeatable flag
+  -v=: flag with value
+persistentflags:
+  --help: bool flag
+completion:
+  flag:
+    optarg: ["one", "two\twith description", "three\twith style\tblue"]
+    v: ["$files"]
+commands:
+- name: sub
+  description: subcommand
+  completion:
+    positional:
+      - ["$list(,)", "1", "2", "3"]
+      - ["$directories"]
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="usage"><a class="header" href="#usage">Usage</a></h1>
+<h2 id="bash"><a class="header" href="#bash">Bash</a></h2>
+<pre><code class="language-sh"># ~/.bashrc
+source &lt;(carapace-spec example/pkill.yaml)
+</code></pre>
+<p><img src="carapace-spec/./usage/bash.png" alt="" /></p>
+<h2 id="elvish"><a class="header" href="#elvish">Elvish</a></h2>
+<pre><code class="language-sh"># ~/.config/elvish/rc.elv
+eval (carapace-spec example/pkill.yaml|slurp)
+</code></pre>
+<p><img src="carapace-spec/./usage/elvish.png" alt="" /></p>
+<h2 id="fish"><a class="header" href="#fish">Fish</a></h2>
+<pre><code class="language-sh"># ~/.config/fish/config.fish
+carapace-spec example/pkill.yaml | source
+</code></pre>
+<p><img src="carapace-spec/./usage/fish.png" alt="" /></p>
+<h2 id="nushell"><a class="header" href="#nushell">Nushell</a></h2>
+<blockquote>
+<p>update config.nu according to <a href="http://www.nushell.sh/cookbook/external_completers.html#multiple-completer">Multiple Completer</a>)</p>
+</blockquote>
+<pre><code class="language-sh">#~/.config/nushell/config.nu
+carapace-spec example/pkill.yaml
+</code></pre>
+<p><img src="carapace-spec/./usage/nushell.png" alt="" /></p>
+<h2 id="oil"><a class="header" href="#oil">Oil</a></h2>
+<pre><code class="language-sh"># ~/.config/oil/oshrc
+source &lt;(carapace-spec example/pkill.yaml)
+</code></pre>
+<p><img src="carapace-spec/./usage/oil.png" alt="" /></p>
+<h2 id="powershell"><a class="header" href="#powershell">Powershell</a></h2>
+<pre><code class="language-sh"># ~/.config/powershell/Microsoft.PowerShell_profile.ps1
+carapace-spec example/pkill.yaml | Out-String | Invoke-Expression
+</code></pre>
+<p><img src="carapace-spec/./usage/powershell.png" alt="" /></p>
+<h1 id="tcsh"><a class="header" href="#tcsh">Tcsh</a></h1>
+<pre><code class="language-sh">## ~/.tcshrc
+eval `carapace-spec example/pkill.yaml`
+</code></pre>
+<p><img src="carapace-spec/./usage/tcsh.png" alt="" /></p>
+<h2 id="xonsh"><a class="header" href="#xonsh">Xonsh</a></h2>
+<pre><code class="language-sh"># ~/.config/xonsh/rc.xsh
+exec($(carapace-spec example/pkill.yaml))
+</code></pre>
+<p><img src="carapace-spec/./usage/xonsh.png" alt="" /></p>
+<h2 id="zsh"><a class="header" href="#zsh">Zsh</a></h2>
+<pre><code class="language-sh"># ~/.zshrc
+source &lt;(carapace-spec example/pkill.yaml)
+</code></pre>
+<p><img src="carapace-spec/./usage/zsh.png" alt="" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="command"><a class="header" href="#command">Command</a></h1>
+<pre><code class="language-go">type Command struct {
+	Name            string
+	Aliases         []string
+	Description     string
+	Group           string
+	Hidden          bool
+	Parsing         string
+	Flags           map[string]string
+	PersistentFlags map[string]string
+	ExclusiveFlags  [][]string
+	Run             string
+	Completion      struct {
+		Flag          map[string][]string
+		Positional    [][]string
+		PositionalAny []string
+		Dash          [][]string
+		DashAny       []string
+	}
+	Commands []Command
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="name"><a class="header" href="#name">Name</a></h1>
+<p>Name of the command.</p>
+<pre><code class="language-yaml">name: add
+</code></pre>
+<p>It can also contain the one-line <a href="https://carapace-sh.github.io/carapace/carapace/action/usage.html">usage</a> message.</p>
+<pre><code class="language-yaml">name: add [-F file | -D dir]... [-f format] profile
+</code></pre>
+<blockquote>
+<p>Recommended syntax is as <a href="https://pkg.go.dev/github.com/spf13/cobra#Command">follows</a>:</p>
+<ul>
+<li><code>[ ]</code> identifies an optional argument. Arguments that are not enclosed in brackets are required.</li>
+<li><code>...</code> indicates that you can specify multiple values for the previous argument.</li>
+<li><code>|</code>   indicates mutually exclusive information. You can use the argument to the left of the separator or the argument to the right of the separator. You cannot use both arguments in a single use of the command.</li>
+<li><code>{ }</code> delimits a set of mutually exclusive arguments when one of the arguments is required. If the arguments are optional, they are enclosed in brackets ([ ]).</li>
+</ul>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="aliases"><a class="header" href="#aliases">Aliases</a></h1>
+<p>Aliases of the command.</p>
+<pre><code class="language-yaml">aliases: [l, ls]
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="description"><a class="header" href="#description">Description</a></h1>
+<p>Description of the command.</p>
+<pre><code class="language-yaml">description: example description
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="group"><a class="header" href="#group">Group</a></h1>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/command/group.html">Group</a> of the command.</p>
+<pre><code class="language-yaml">group: core
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hidden"><a class="header" href="#hidden">Hidden</a></h1>
+<p>Whether to hide the command during subcommand completion.</p>
+<pre><code class="language-yaml">hidden: true
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="parsing"><a class="header" href="#parsing">Parsing</a></h1>
+<p>Sets flag parsing mode. One of:</p>
+<ul>
+<li><code>interspersed</code> mixed flags and positional arguments</li>
+<li><code>non-interspersed</code> flag parsing stopped after first positional argument</li>
+<li><code>disabled</code> flag parsing disabled</li>
+</ul>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: parsing
+persistentflags:
+  -h, --help: show help
+commands:
+  - name: disabled
+    parsing: disabled
+    completion:
+      positionalany: [one, two, three]
+  - name: interspersed
+    parsing: interspersed
+    completion:
+      positionalany: [one, two, three]
+  - name: non-interspersed
+    parsing: non-interspersed
+    completion:
+      positionalany: [one, two, three]
+</code></pre>
+<p><img src="carapace-spec/command/./parsing.cast" alt="" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flags"><a class="header" href="#flags">Flags</a></h1>
+<p>Flags are defined as a map of name and description.</p>
+<pre><code class="language-yaml">flags:
+  -b: bool flag
+  -v=: shorthand with value
+  --repeatable*: longhand repeatable
+  -o, --optarg?: shorthand and longhand with optional argument
+  --hidden&amp;: longhand hidden
+  --required!: longhand required
+</code></pre>
+<h2 id="modifiers"><a class="header" href="#modifiers">Modifiers:</a></h2>
+<ul>
+<li><code>=</code> flag takes an argument</li>
+<li><code>*</code> flag is repeatable</li>
+<li><code>?</code> flag takes an optional argument</li>
+<li><code>&amp;</code> flag is hidden</li>
+<li><code>!</code> flag is required</li>
+</ul>
+<h2 id="non-posix"><a class="header" href="#non-posix">Non-posix</a></h2>
+<p>With <a href="https://github.com/carapace-sh/carapace-pflag">carapace-pflag</a> non-posix flags possible as well:</p>
+<pre><code class="language-yaml">  -np: non-posix shorthand
+  -np, -nonposix:  non-posix shorthand and longhand
+  -np, --nonposix: non-posix shorthand mixed with posix longhand
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="persistentflags"><a class="header" href="#persistentflags">PersistentFlags</a></h1>
+<p>Same as <a href="carapace-spec/command/./flags.html">Flags</a>, but passes them down to subcommands.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exclusiveflags"><a class="header" href="#exclusiveflags">ExclusiveFlags</a></h1>
+<p>Mark flags <a href="https://pkg.go.dev/github.com/spf13/cobra#Command.MarkFlagsMutuallyExclusive">mutually exclusive</a>.</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: exclusiveflags
+flags:
+  --add: add package
+  --delete: delete package
+exclusiveflags:
+  - [add, delete]
+</code></pre>
+<p><img src="carapace-spec/command/./exclusiveflags.cast" alt="" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="run"><a class="header" href="#run">Run</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="completion"><a class="header" href="#completion">Completion</a></h1>
+<p>Completion for a position is defined by an array of static <a href="carapace-spec/command/../values.html">Values</a> and <a href="carapace-spec/command/../macros.html">Macros</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flag"><a class="header" href="#flag">Flag</a></h1>
+<p>Define <a href="https://carapace-sh.github.io/carapace/carapace/gen/flagCompletion.html">flag completion</a>.</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: flag
+flags:
+  -e=: executables
+  -f, --file=: file
+completion:
+  flag:
+    e: ["$executables"]
+    file: ["$files"]
+</code></pre>
+<p><img src="carapace-spec/command/completion/./flag.cast" alt="" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="positional"><a class="header" href="#positional">Positional</a></h1>
+<p>Define <a href="https://carapace-sh.github.io/carapace/carapace/gen/positionalCompletion.html">positional completion</a>.</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: positional
+completion:
+  positional:
+    - [pos1, positional1]
+    - [pos2, positional2]
+</code></pre>
+<p><img src="carapace-spec/command/completion/./positional.cast" alt="" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="positionalany"><a class="header" href="#positionalany">PositionalAny</a></h1>
+<p>Define <a href="https://carapace-sh.github.io/carapace/carapace/gen/positionalCompletion.html">positional any completion</a>.</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: positionalany
+completion:
+  positionalany: [one, two, three]
+</code></pre>
+<p><img src="carapace-spec/command/completion/positionalany.cast" alt="" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="dash"><a class="header" href="#dash">Dash</a></h1>
+<p>Define <a href="https://carapace-sh.github.io/carapace/carapace/gen/dashCompletion.html">dash completion</a>.</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: dash
+completion:
+  dash:
+    - [d1, dash1]
+    - [d2, dash2]
+</code></pre>
+<p><img src="carapace-spec/command/completion/./dash.cast" alt="" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="dashany"><a class="header" href="#dashany">DashAny</a></h1>
+<p>Define <a href="https://carapace-sh.github.io/carapace/carapace/gen/dashAnyCompletion.html">dash any completion</a>.</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: dashany
+completion:
+  dashany: [one, two, three]
+</code></pre>
+<p><img src="carapace-spec/command/completion/dashany.cast" alt="" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="commands"><a class="header" href="#commands">Commands</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="values"><a class="header" href="#values">Values</a></h1>
+<p>Values are defined with an optional description and optional <a href="https://elv.sh/ref/builtin.html#styled">style</a> delimited by <code>\t</code>.</p>
+<pre><code class="language-yaml">["value", "value\tdescription", "value\tdescription\tblue"]
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="macros"><a class="header" href="#macros">Macros</a></h1>
+<p>Macros are basically <a href="https://carapace-sh.github.io/carapace/carapace/action.html">Actions</a> exposed to the spec (E.g. <a href="https://carapace-sh.github.io/carapace/carapace/action/actionFiles.html"><code>$files([.go, go.mod])</code></a>.</p>
+<blockquote>
+<p>The brackets are optional if no argument is passed (so <code>$files</code> is equivalent to <code>$files()</code>).</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="core"><a class="header" href="#core">Core</a></h1>
+<p>Core macros provided by <a href="https://github.com/carapace-sh/carapace-spec">carapace-spec</a>.</p>
+<h2 id="directories"><a class="header" href="#directories">directories</a></h2>
+<p><a href="https://carapace-sh.githbub.io/carapace/carapace/defaultActions/actionDirectories.html"><code>$directories</code></a> completes directories.</p>
+<pre><code class="language-yaml">["$directories"]
+</code></pre>
+<h2 id="exec"><a class="header" href="#exec">exec</a></h2>
+<p><a href="https://carapace-sh.githbub.io/carapace/carapace/defaultActions/actionExecCommand.html"><code>$(&lt;command&gt;)</code></a> executes given command in a <code>sh</code> / <code>pwsh</code> shell.</p>
+<pre><code class="language-yaml">["$(echo -e 'a\nb\nc')"]
+</code></pre>
+<h2 id="executables"><a class="header" href="#executables">executables</a></h2>
+<p><a href="https://carapace-sh.githbub.io/carapace/carapace/defaultActions/actionExecutables.html"><code>$executables</code></a> completes <a href="https://en.wikipedia.org/wiki/PATH_(variable)">PATH</a> executables.</p>
+<pre><code class="language-yaml">["$executables"]
+</code></pre>
+<h2 id="files"><a class="header" href="#files">files</a></h2>
+<p><a href="https://carapace-sh.githbub.io/carapace/carapace/defaultActions/actionFiles.html"><code>$files([&lt;suffixes&gt;])</code></a> completes files with an optional list of suffixes to filter on.</p>
+<pre><code class="language-yaml">["$files([.go, go.mod, go.sum])"]
+</code></pre>
+<h2 id="message"><a class="header" href="#message">message</a></h2>
+<p><a href="https://carapace-sh.githbub.io/carapace/carapace/defaultActions/actionMessage.html"><code>$message(&lt;message&gt;)</code></a> adds given error message to completion.</p>
+<pre><code class="language-yaml">["$message(some error)"]
+</code></pre>
+<h2 id="spec"><a class="header" href="#spec">spec</a></h2>
+<p><code>$spec(&lt;file&gt;)</code> completes arguments using the given spec file.
+This implicitly <a href="https://pkg.go.dev/github.com/spf13/cobra#Command">disables flag parsing</a> for the corresponding (sub)command.</p>
+<pre><code class="language-yaml">["$spec(example.yaml)"]
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="modifier"><a class="header" href="#modifier">Modifier</a></h1>
+<p>Modifiers change the completion of macros and values.
+These can be set</p>
+<ul>
+<li>generic <code>["&lt;macro&gt;", "&lt;value&gt;", "&lt;modifier&gt;"]</code></li>
+<li>specific <code>["&lt;macro&gt; ||| &lt;modifier&gt; ||| &lt;modifier&gt;"]</code>.</li>
+</ul>
+<blockquote>
+<p>The delimiter (<code>|||</code>) is currently very strict and not trimmed.</p>
+</blockquote>
+<h2 id="chdir"><a class="header" href="#chdir">chdir</a></h2>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/action/chdir.html"><code>$chdir(&lt;directory&gt;)</code></a> changes the directory.</p>
+<pre><code class="language-yaml">["$files", "$chdir(/tmp)"]
+</code></pre>
+<p>The following macros can be passed as well instead of a static directory:</p>
+<ul>
+<li><a href="https://pkg.go.dev/github.com/carapace-sh/carapace/pkg/traverse#GitDir"><code>$gitdir</code></a> .git folder</li>
+<li><a href="https://pkg.go.dev/github.com/carapace-sh/carapace/pkg/traverse#GitWorkTree"><code>$gitworktree</code></a> root of the working directory for a non-bare repository</li>
+<li><a href="https://pkg.go.dev/github.com/carapace-sh/carapace/pkg/traverse#Parent"><code>$parent(\[file, dir\])</code></a> first parent directory containing any of the given names/directories</li>
+<li><a href="https://pkg.go.dev/github.com/carapace-sh/carapace/pkg/traverse#TempDir"><code>$tempdir</code></a> default directory to use for temporary files</li>
+<li><a href="https://pkg.go.dev/github.com/carapace-sh/carapace/pkg/traverse#UserCacheDir"><code>$usercachedir</code></a> root directory to use for user-specific cached data</li>
+<li><a href="https://pkg.go.dev/github.com/carapace-sh/carapace/pkg/traverse#UserConfigDir"><code>$userconfigdir</code></a> default root directory to use for user-specific configuration data</li>
+<li><a href="https://pkg.go.dev/github.com/carapace-sh/carapace/pkg/traverse#UserHomeDir"><code>$userhomedir</code></a> current user's home directory</li>
+<li><a href="https://pkg.go.dev/github.com/carapace-sh/carapace/pkg/traverse#XdgCacheHome"><code>$xdgcachehome</code></a> cache directory (fallback to UserCacheDir)</li>
+<li><a href="https://pkg.go.dev/github.com/carapace-sh/carapace/pkg/traverse#XdgConfigHome"><code>$xdgconfighome</code></a> home directory (fallback to UserConfigDir)</li>
+</ul>
+<pre><code class="language-yaml">["$files", "$chdir($gitdir)"]
+</code></pre>
+<h2 id="filter"><a class="header" href="#filter">filter</a></h2>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/action/filter.html"><code>$filter([&lt;value&gt;])</code></a> filters given values.</p>
+<pre><code class="language-yaml">["one", "two", "three", "$filter([two])"]
+</code></pre>
+<h2 id="filterargs"><a class="header" href="#filterargs">filterargs</a></h2>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/action/filterArgs.html"><code>$filterargs</code></a> filters <code>Context.Args</code>.</p>
+<pre><code class="language-yaml">["$files", "$filterargs"]
+</code></pre>
+<h2 id="list"><a class="header" href="#list">list</a></h2>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/action/list.html"><code>$list(&lt;delimiter&gt;)</code></a> creates a list with given divider.</p>
+<pre><code class="language-yaml">["one", "two", "three", "$list(,)"]
+</code></pre>
+<h2 id="multiparts"><a class="header" href="#multiparts">multiparts</a></h2>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/action/multiParts.html"><code>$multiparts([&lt;delimiter&gt;])</code></a> completes values splitted by given delimiter(s) separately.</p>
+<pre><code class="language-yaml">["one/two/three", "$multiparts([/])"]
+</code></pre>
+<h2 id="nospace"><a class="header" href="#nospace">nospace</a></h2>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/action/noSpace.html"><code>$nospace(&lt;characters&gt;)</code></a> disables space suffix for given character(s).</p>
+<pre><code class="language-yaml">["one", "two/", "three,", "$nospace(/,)"]
+</code></pre>
+<h2 id="prefix"><a class="header" href="#prefix">prefix</a></h2>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/action/prefix.html"><code>$pefix(&lt;prefix&gt;)</code></a> adds a prefix to the inserted values.</p>
+<pre><code class="language-yaml">["$files", "$prefix(file://)"]
+</code></pre>
+<h2 id="retain"><a class="header" href="#retain">retain</a></h2>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/action/retain.html"><code>$retain([&lt;value&gt;])</code></a> retains given values.</p>
+<pre><code class="language-yaml">["one", "two", "three", "$retain([two])"]
+</code></pre>
+<h2 id="shift"><a class="header" href="#shift">shift</a></h2>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/action/shift.html"><code>$shift(&lt;n&gt;)</code></a> shifts positional arguments left n times.</p>
+<pre><code class="language-yaml">["one", "two", "three", "$filterargs", "$shift(1)"]
+</code></pre>
+<h2 id="split"><a class="header" href="#split">split</a></h2>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/action/split.html"><code>$split</code></a> splits <code>Context.Value</code> lexicographically and replaces <code>Context.Args</code> with the tokens.</p>
+<pre><code class="language-yaml">["one", "two", "three", "$filterargs", "$split"]
+</code></pre>
+<h2 id="splitp"><a class="header" href="#splitp">splitp</a></h2>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/action/splitP.html"><code>$splitp</code></a> is like Split but supports pipelines.</p>
+<pre><code class="language-yaml">["one", "two", "three", "$filterargs", "$splitp"]
+</code></pre>
+<h2 id="suffix"><a class="header" href="#suffix">suffix</a></h2>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/action/suffix.html"><code>$suffix(&lt;suffix&gt;)</code></a> adds a suffix to the inserted values.</p>
+<pre><code class="language-yaml">["apple", "melon", "orange", "$suffix(juice)"]
+</code></pre>
+<h2 id="suppress"><a class="header" href="#suppress">suppress</a></h2>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/action/suppress.html"><code>$suppress(&lt;regex&gt;)</code></a> suppresses specific error messages using a regular expression.</p>
+<pre><code class="language-yaml">["$message(fail)", "$suppress(fail)"]
+</code></pre>
+<h2 id="style"><a class="header" href="#style">style</a></h2>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/action/style.html"><code>$style(&lt;style&gt;)</code></a> sets the style for all values.</p>
+<pre><code class="language-yaml">["one", "two", "three", "$style(underlined)"]
+</code></pre>
+<h2 id="tag"><a class="header" href="#tag">tag</a></h2>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/action/tag.html"><code>$tag(&lt;tag&gt;)</code></a> sets the tag for all values.</p>
+<pre><code class="language-yaml">["one", "two", "three", "$tag(numbers)"]
+</code></pre>
+<h2 id="uniquelist"><a class="header" href="#uniquelist">uniquelist</a></h2>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/action/uniqueList.html"><code>$uniquelist(&lt;delimiter&gt;)</code></a> creates a unique list with given divider.</p>
+<pre><code class="language-yaml">["one", "two", "three", "$uniquelist(,)"]
+</code></pre>
+<h2 id="usage-1"><a class="header" href="#usage-1">usage</a></h2>
+<p><a href="https://carapace-sh.github.io/carapace/carapace/action/usage.html"><code>$usage(&lt;usage&gt;)</code></a> sets the usage message.</p>
+<pre><code class="language-yaml">["$usage(custom)"]
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="custom"><a class="header" href="#custom">Custom</a></h1>
+<p>Custom macros can be added with <a href="https://pkg.go.dev/github.com/carapace-sh/carapace-spec#AddMacro"><code>AddMacro</code></a>.</p>
+<pre><code class="language-go">// `$_noarg` without argument
+AddMacro("noarg", MacroN(func() carapace.Action { return carapace.ActionValues()}))
+
+// `$_arg({name: example, enabled: true})` with argument (primitive or struct)
+AddMacro("arg", MacroI(func(u User) carapace.Action { return carapace.ActionValues()}))
+
+// `$_vararg([another, example])` with variable arguments (primitive or struct)
+AddMacro("vararg", MacroV(func(s ...string) carapace.Action { return carapace.ActionValues()}))
+</code></pre>
+<blockquote>
+<p>Arguments are parsed as <code>yaml</code> so only struct keys deviating from the default need to be set.</p>
+</blockquote>
+<h2 id="default-experimental"><a class="header" href="#default-experimental">Default (experimental)</a></h2>
+<p>A <code>Default()</code> method can be added to a struct passed to <a href="https://pkg.go.dev/github.com/carapace-sh/carapace-spec#MacroI"><code>MacroI</code></a>.</p>
+<p>It will be called when the macro is used without argumeng (<code>$_arg</code> instead of <code>$_arg({user: example})</code>).</p>
+<pre><code class="language-go">type User struct {
+	Name   string
+	Enabled bool
+}
+
+func (u User) Default() User {
+	u.Name = "example"
+	u.Enabled = true
+	return u
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="variables"><a class="header" href="#variables">Variables</a></h1>
+<p>Variables are replaced using <a href="https://github.com/drone/envsubst">drone/envsubst</a>.</p>
+<ul>
+<li><code>${C_ARG&lt;position&gt;}</code> positional arguments [0..n]</li>
+<li><code>${C_FLAG_&lt;flagname&gt;}</code> flag values (if modified)</li>
+<li><code>${C_PART&lt;position&gt;}</code> parts of the current word during multipart completion [0..n]</li>
+<li><code>${C_VALUE}</code> the word currently being completed</li>
+</ul>
+<pre><code class="language-yaml">name: myvar
+flags:
+  --suffix=: file suffixes
+completion:
+  flag:
+    suffix: ["$list(,)", ".go", "go.sum", "go.mod", ".md", "LICENSE"]
+  positional:
+    - ["$files([${C_FLAG_SUFFIX//,/, }])"] # replace `,` with `, ` for valid array syntax
+    - ["${C_FLAG_SUFFIX:-default}", "${C_ARG0}"] # use default if flag is not set
+</code></pre>
+<p><img src="carapace-spec/./variables.cast" alt="" /></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="asciinema/asciinema-player.min.js"></script>
+        <script src="asciinema/load.js"></script>
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
